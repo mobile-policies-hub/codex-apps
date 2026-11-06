@@ -339,7 +339,7 @@ class ApexCalcController extends ChangeNotifier {
   }
 
   void _restore() {
-    final raw = vault?.read('apex.progress');
+    final raw = vault?.read('apex.progress.v2');
     if (raw == null) return;
     try {
       final decoded = jsonDecode(raw);
@@ -391,7 +391,7 @@ class ApexCalcController extends ChangeNotifier {
     final store = vault;
     if (store == null) return;
     store.write(
-      'apex.progress',
+      'apex.progress.v2',
       jsonEncode({
         'history': [
           for (final note in history)

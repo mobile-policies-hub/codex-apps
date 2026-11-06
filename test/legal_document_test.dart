@@ -22,8 +22,38 @@ void main() {
         expect(html, contains(brand.supportEmail));
         if (document == LegalDocument.privacy) {
           expect(html, contains('does not sell personal information'));
+          final russian = legalDocumentHtml(brand, document, language: 'ru');
+          switch (brand.id) {
+            case AppBrandId.ancientCodex:
+              expect(html.toLowerCase(), isNot(contains('calculator')));
+              expect(html.toLowerCase(), isNot(contains('habit')));
+              expect(russian, isNot(contains('калькулятор')));
+              expect(russian, isNot(contains('привыч')));
+            case AppBrandId.zenithHabits:
+              expect(html, contains('habit checkmarks'));
+              expect(html.toLowerCase(), isNot(contains('calculator')));
+              expect(russian, isNot(contains('калькулятор')));
+              expect(russian, isNot(contains('урок')));
+            case AppBrandId.apexCalc:
+              expect(html, contains('sample rates for reference only'));
+              expect(html.toLowerCase(), isNot(contains('lesson')));
+              expect(html.toLowerCase(), isNot(contains('habit')));
+          }
         } else {
-          expect(html, contains('not financial, tax, or investment advice'));
+          switch (brand.id) {
+            case AppBrandId.ancientCodex:
+              expect(html, contains('not a certified course'));
+              expect(html.toLowerCase(), isNot(contains('calculator')));
+              expect(html.toLowerCase(), isNot(contains('habit')));
+            case AppBrandId.zenithHabits:
+              expect(html, contains('not medical advice'));
+              expect(html.toLowerCase(), isNot(contains('calculator')));
+              expect(html.toLowerCase(), isNot(contains('lesson')));
+            case AppBrandId.apexCalc:
+              expect(html, contains('not financial, tax, or investment advice'));
+              expect(html.toLowerCase(), isNot(contains('lesson')));
+              expect(html.toLowerCase(), isNot(contains('habit')));
+          }
         }
       }
     }
@@ -68,6 +98,8 @@ void main() {
     expect(hooks.html, contains('Ancient Codex'));
     expect(hooks.html, contains('dev.outbox.88@outlook.com'));
     expect(hooks.html, contains('Privacy Policy'));
+    expect(hooks.html, isNot(contains('alculator')));
+    expect(hooks.html, isNot(contains('abit')));
     expect(
       tester.widget<Text>(find.byKey(const Key('web-url'))).data,
       'Privacy Policy',
@@ -83,6 +115,8 @@ void main() {
       title: 'Terms of Service',
     );
     expect(hooks.html, contains('Terms of Service'));
+    expect(hooks.html, contains('not a certified course'));
+    expect(hooks.html, isNot(contains('alculator')));
     expect(hooks.html, contains('Ancient Codex'));
     expect(
       tester.widget<Text>(find.byKey(const Key('web-url'))).data,

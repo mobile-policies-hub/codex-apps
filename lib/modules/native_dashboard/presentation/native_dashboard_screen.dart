@@ -34,7 +34,9 @@ class NativeDashboardScreen extends StatelessWidget {
                   today: today,
                   deck: deck,
                   vault: services?.vault,
-                  alarms: services?.alarms,
+                  alarms: brand.id == AppBrandId.zenithHabits
+                      ? services?.alarms
+                      : null,
                 ),
               ),
               ChangeNotifierProvider(

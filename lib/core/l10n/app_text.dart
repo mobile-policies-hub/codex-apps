@@ -485,6 +485,7 @@ const _tables = <String, Map<String, String>>{
     '{done} of {total} habits done': '{done} из {total} привычек сделано',
     'Forward': 'Вперёд',
     'Opening the page': 'Открываем страницу',
+    'This month': 'Этот месяц',
   },
   'es': {
     'Settings': 'Ajustes',
@@ -902,6 +903,7 @@ const _tables = <String, Map<String, String>>{
     '{done} of {total} habits done': '{done} de {total} hábitos hechos',
     'Forward': 'Adelante',
     'Opening the page': 'Abriendo la página',
+    'This month': 'Este mes',
   },
   'de': {
     'Settings': 'Einstellungen',
@@ -1319,6 +1321,7 @@ const _tables = <String, Map<String, String>>{
     '{done} of {total} habits done': '{done} von {total} Gewohnheiten erledigt',
     'Forward': 'Vor',
     'Opening the page': 'Seite wird geöffnet',
+    'This month': 'Dieser Monat',
   },
   'fr': {
     'Settings': 'Réglages',
@@ -1736,5 +1739,6 @@ const _tables = <String, Map<String, String>>{
     '{done} of {total} habits done': '{done} sur {total} habitudes faites',
     'Forward': 'Avant',
     'Opening the page': 'Ouverture de la page',
+    'This month': 'Ce mois-ci',
   },
 };

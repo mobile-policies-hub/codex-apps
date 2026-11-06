@@ -168,7 +168,7 @@ class TrackerController extends ChangeNotifier {
       final score = day == today
           ? focusScore
           : (_scoresByDay[_dayKey(day)] ?? 0);
-      if (score <= 0) return 1;
+      if (score <= 0) return 0;
       return (1 + (score / 100 * 7)).round().clamp(1, 8);
     });
   }
@@ -391,7 +391,7 @@ class TrackerController extends ChangeNotifier {
   }
 
   void _restore() {
-    final raw = vault?.read('zenith.progress');
+    final raw = vault?.read('zenith.progress.v2');
     if (raw == null) return;
     try {
       final decoded = jsonDecode(raw);
@@ -485,7 +485,7 @@ class TrackerController extends ChangeNotifier {
     if (store == null) return;
     _scoresByDay[_dayKey(today)] = focusScore;
     store.write(
-      'zenith.progress',
+      'zenith.progress.v2',
       jsonEncode({
         'habits': [
           for (final habit in habits)

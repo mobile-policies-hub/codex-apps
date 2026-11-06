@@ -618,7 +618,7 @@ class _Heatmap extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            context.tr('30 days'),
+            context.tr('This month'),
             style: TextStyle(
               color: Colors.white,
               fontWeight: FontWeight.w700,
@@ -648,7 +648,9 @@ class _Heatmap extends StatelessWidget {
                       child: DecoratedBox(
                         decoration: BoxDecoration(
                           color: accent.withValues(
-                            alpha: 0.18 + marks[index] / 8 * 0.7,
+                            alpha: marks[index] == 0
+                                ? 0.08
+                                : 0.25 + marks[index] / 8 * 0.65,
                           ),
                           borderRadius: BorderRadius.circular(4),
                         ),

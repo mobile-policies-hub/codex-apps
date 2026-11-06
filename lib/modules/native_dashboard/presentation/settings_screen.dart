@@ -157,10 +157,12 @@ class SettingsScreen extends StatelessWidget {
                   ),
                 ],
                 const SizedBox(height: 22),
-                const _SectionLabel('Notifications'),
-                const SizedBox(height: 8),
-                _SettingsCard(child: _NotificationSettings(tracker: tracker)),
-                const SizedBox(height: 22),
+                if (brand.id == AppBrandId.zenithHabits) ...[
+                  const _SectionLabel('Notifications'),
+                  const SizedBox(height: 8),
+                  _SettingsCard(child: _NotificationSettings(tracker: tracker)),
+                  const SizedBox(height: 22),
+                ],
                 const _SectionLabel('About'),
                 const SizedBox(height: 8),
                 _SettingsCard(

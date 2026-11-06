@@ -502,7 +502,7 @@ class AncientCodexController extends ChangeNotifier {
   }
 
   void _restore() {
-    final raw = vault?.read('codex.progress.v2');
+    final raw = vault?.read('codex.progress.v3');
     if (raw == null) return;
     try {
       final decoded = jsonDecode(raw);
@@ -556,7 +556,7 @@ class AncientCodexController extends ChangeNotifier {
     final store = vault;
     if (store == null) return;
     store.write(
-      'codex.progress.v2',
+      'codex.progress.v3',
       jsonEncode({
         'lessons': {
           for (final lesson in lessons)
