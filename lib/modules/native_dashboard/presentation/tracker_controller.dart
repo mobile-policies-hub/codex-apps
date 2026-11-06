@@ -49,7 +49,7 @@ class TrackerController extends ChangeNotifier {
   int scoreGoal = 100;
   int waterGoal = 8;
   bool remindersEnabled = true;
-  bool notificationsEnabled = true;
+  bool notificationsEnabled = false;
   int completedSessions = 0;
   int focusedMinutes = 0;
   int focusChoice = 25;
@@ -391,7 +391,7 @@ class TrackerController extends ChangeNotifier {
   }
 
   void _restore() {
-    final raw = vault?.read('zenith.progress.v2');
+    final raw = vault?.read('zenith.progress.v3');
     if (raw == null) return;
     try {
       final decoded = jsonDecode(raw);
@@ -485,7 +485,7 @@ class TrackerController extends ChangeNotifier {
     if (store == null) return;
     _scoresByDay[_dayKey(today)] = focusScore;
     store.write(
-      'zenith.progress.v2',
+      'zenith.progress.v3',
       jsonEncode({
         'habits': [
           for (final habit in habits)

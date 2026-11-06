@@ -25,8 +25,12 @@ const _months = [
   'December',
 ];
 
-String formatLongDate(DateTime date) {
-  return '${_weekdays[date.weekday - 1]}, ${_months[date.month - 1]} ${date.day}';
+String formatLongDate(
+  DateTime date, [
+  String Function(String english)? translate,
+]) {
+  final tr = translate ?? (String value) => value;
+  return '${tr(_weekdays[date.weekday - 1])}, ${tr(_months[date.month - 1])} ${date.day}';
 }
 
 String formatCount(int value) {

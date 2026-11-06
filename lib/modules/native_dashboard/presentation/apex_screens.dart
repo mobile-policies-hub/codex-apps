@@ -610,12 +610,24 @@ class _ApexHistoryScreenState extends State<ApexHistoryScreen> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(
-                  note.title,
-                  style: TextStyle(
-                    color: scheme.primary,
-                    fontWeight: FontWeight.w700,
-                  ),
+                Row(
+                  children: [
+                    Expanded(
+                      child: Text(
+                        _noteTitle(context, note),
+                        style: TextStyle(
+                          color: scheme.primary,
+                          fontWeight: FontWeight.w700,
+                        ),
+                      ),
+                    ),
+                    IconButton(
+                      key: Key('apex-delete-${note.id}'),
+                      tooltip: context.tr('Delete'),
+                      onPressed: () => calc.deleteNote(note.id),
+                      icon: Icon(Icons.delete_outline, color: scheme.onSurfaceVariant),
+                    ),
+                  ],
                 ),
                 const SizedBox(height: 8),
                 _NoteEditor(
@@ -679,6 +691,14 @@ class _NoteEditorState extends State<_NoteEditor> {
   }
 }
 
+String _noteTitle(BuildContext context, CalcNote note) {
+  const prefix = 'Interest · ';
+  if (note.title.startsWith(prefix)) {
+    return '${context.tr('Interest')} · ${note.title.substring(prefix.length)}';
+  }
+  return note.title;
+}
+
 String _conversionCaption(BuildContext context, ApexCalcController calc) {
   if (calc.measure == MeasureKind.share) {
     return context
@@ -686,7 +706,15 @@ String _conversionCaption(BuildContext context, ApexCalcController calc) {
         .replaceAll('{percent}', '${calc.sharePercent.round()}')
         .replaceAll('{amount}', '${calc.convertAmount.round()}');
   }
-  return calc.conversionCaption;
+  return _localizeUnits(context, calc.conversionCaption);
+}
+
+String _localizeUnits(BuildContext context, String caption) {
+  var next = caption;
+  for (final unit in const ['km', 'kg', 'ft', 'in', 'lb', 'oz', 'm', 'g']) {
+    next = next.replaceAll(' $unit', ' ${context.tr(unit)}');
+  }
+  return next;
 }
 
 String _measureLabel(MeasureKind kind) {

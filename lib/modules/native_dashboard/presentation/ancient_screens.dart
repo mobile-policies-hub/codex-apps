@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
+import 'package:share_plus/share_plus.dart';
 
 import 'package:hybrid_app/core/config/app_brand_config.dart';
 import 'package:hybrid_app/core/l10n/app_text.dart';
@@ -182,7 +183,7 @@ class _LessonCard extends StatelessWidget {
                             ),
                             if (done)
                               SoftTag(
-                                label: context.tr('Top'),
+                                label: context.tr('Passed'),
                                 color: const Color(0xFFE0A93B),
                               ),
                           ],
@@ -472,9 +473,7 @@ class _FactBanner extends StatelessWidget {
           ),
           TextButton.icon(
             onPressed: () {
-              ScaffoldMessenger.of(context).showSnackBar(
-                SnackBar(content: Text(context.tr('Quote ready to share'))),
-              );
+              Share.share(quote);
             },
             icon: const Icon(
               Icons.ios_share,
@@ -541,7 +540,7 @@ class TrialsScreen extends StatelessWidget {
               FilledButton(
                 key: const Key('daily-challenge'),
                 onPressed: codex.dailyDone ? null : codex.completeDaily,
-                child: Text(context.tr(codex.dailyDone ? 'Closed' : 'Mark')),
+                child: Text(context.tr(codex.dailyDone ? 'Done' : 'Mark')),
               ),
             ],
           ),
@@ -1001,6 +1000,10 @@ class CodexProgressScreen extends StatelessWidget {
                           : '${context.tr('Best score')}: ${codex.bestScore}',
                       style: TextStyle(color: scheme.onSurface),
                     ),
+                    Text(
+                      '${context.tr('Best drill')}: ${codex.drillBest == 0 ? '—' : codex.drillBest}',
+                      style: TextStyle(color: scheme.onSurface),
+                    ),
                   ],
                 ),
               ),
@@ -1047,6 +1050,10 @@ bool _hasJourneyHistory(AncientCodexController codex) {
 }
 
 String _activityLine(BuildContext context, String line) {
+  if (line.startsWith('Scribe drill: ')) {
+    final score = line.substring('Scribe drill: '.length);
+    return '${context.tr('Scribe drill')}: $score';
+  }
   if (line.startsWith('Lesson read: ')) {
     final title = line.substring('Lesson read: '.length);
     return '${context.tr('Lesson read')}: ${context.tr(title)}';

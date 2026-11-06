@@ -98,7 +98,9 @@ class BrandFeed extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
-      padding: padding,
+      padding: padding.copyWith(
+        bottom: padding.bottom + MediaQuery.viewInsetsOf(context).bottom + 36,
+      ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: children,

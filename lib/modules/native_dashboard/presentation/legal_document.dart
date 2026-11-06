@@ -28,6 +28,12 @@ String termsOfServiceUrl(AppBrandConfig brand) {
   return privacyPolicyUrl(brand).replaceFirst('privacy.html', 'terms.html');
 }
 
+String _publicUrl(AppBrandConfig brand, String language) {
+  final url = privacyPolicyUrl(brand);
+  if (language == 'en') return url;
+  return '$url?lang=$language';
+}
+
 /// Local policy page for [brand], shown by the in-app web view.
 String legalDocumentHtml(
   AppBrandConfig brand,
@@ -39,7 +45,7 @@ String legalDocumentHtml(
   final copy = _legalCopy(brand.id, language, document, name, email);
   final title = _escape(copy.$1);
   final publicLine = document == LegalDocument.privacy
-      ? _publicPageLine(language, privacyPolicyUrl(brand))
+      ? _publicPageLine(language, _publicUrl(brand, language))
       : '';
   return '''
 <!DOCTYPE html>

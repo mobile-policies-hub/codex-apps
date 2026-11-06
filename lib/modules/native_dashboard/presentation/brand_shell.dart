@@ -52,7 +52,9 @@ class _BrandShellState extends State<BrandShell> {
     if (push != null) _scheduleSection(push, brand.id);
     final tabs = _tabsFor(context, brand.id);
     final index = _index >= tabs.length ? 0 : _index;
-    final title = index == 0 ? brand.nativeDashboardTitle : tabs[index].label;
+    final title = index == 0
+        ? context.tr(brand.nativeDashboardTitle)
+        : tabs[index].label;
     final scheme = Theme.of(context).colorScheme;
 
     return BrandBackdrop(

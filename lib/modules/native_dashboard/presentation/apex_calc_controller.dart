@@ -322,6 +322,13 @@ class ApexCalcController extends ChangeNotifier {
     notifyListeners();
   }
 
+  void deleteNote(int id) {
+    final before = history.length;
+    history.removeWhere((note) => note.id == id);
+    if (history.length == before) return;
+    notifyListeners();
+  }
+
   void updateNote(int index, String note) {
     if (index < 0 || index >= history.length) return;
     history[index].note = note;
@@ -339,7 +346,7 @@ class ApexCalcController extends ChangeNotifier {
   }
 
   void _restore() {
-    final raw = vault?.read('apex.progress.v2');
+    final raw = vault?.read('apex.progress.v3');
     if (raw == null) return;
     try {
       final decoded = jsonDecode(raw);
@@ -391,7 +398,7 @@ class ApexCalcController extends ChangeNotifier {
     final store = vault;
     if (store == null) return;
     store.write(
-      'apex.progress.v2',
+      'apex.progress.v3',
       jsonEncode({
         'history': [
           for (final note in history)

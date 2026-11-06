@@ -9,9 +9,29 @@
     h1 { font-size: 22px; }
     a { color: #0b57d0; }
   </style>
+
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+  var lang = new URLSearchParams(location.search).get('lang') || 'en';
+  var nodes = document.querySelectorAll('[data-lang]');
+  var hit = false;
+  nodes.forEach(function (node) {
+    var show = node.getAttribute('data-lang') === lang;
+    node.hidden = !show;
+    if (show) hit = true;
+  });
+  if (!hit) {
+    nodes.forEach(function (node) {
+      node.hidden = node.getAttribute('data-lang') !== 'en';
+    });
+  }
+  document.documentElement.lang = hit ? lang : 'en';
+});
+</script>
 </head>
 <body>
-  <h1>Privacy Policy</h1>
+<div data-lang="en">
+<h1>Privacy Policy</h1>
   <p><strong>Ancient Codex</strong></p>
   <p>Effective date: 6 November 2026.</p>
   <p>This policy explains what Ancient Codex does with information. The same text is shown in the app under Settings, Privacy Policy.</p>
@@ -31,5 +51,10 @@
   <p>If this policy changes, the updated text will be shown in Settings and on this page. The effective date will change with it.</p>
   <h2>Contact</h2>
   <p>Questions: <a href="mailto:dev.outbox.88@outlook.com">dev.outbox.88@outlook.com</a></p>
+</div>
+<div data-lang="ru" hidden><h1>Политика конфиденциальности</h1><p><strong>Ancient Codex</strong></p><p>Дата: 6 ноября 2026.</p><p>Ancient Codex хранит на этом устройстве прогресс уроков, результаты квиза, закладки и выбранный язык. Эти сведения нам не отправляются. Калькулятора и привычек в приложении нет.</p><p>Поддержка: <a href="mailto:dev.outbox.88@outlook.com">dev.outbox.88@outlook.com</a>. Учётная запись не нужна. Приложение не продаёт личные сведения.</p></div>
+<div data-lang="es" hidden><h1>Política de privacidad</h1><p><strong>Ancient Codex</strong></p><p>Ancient Codex guarda en este dispositivo el progreso de las lecciones, los resultados del cuestionario, los marcadores y el idioma. No hay calculadora ni hábitos. Soporte: <a href="mailto:dev.outbox.88@outlook.com">dev.outbox.88@outlook.com</a>.</p></div>
+<div data-lang="de" hidden><h1>Datenschutz</h1><p><strong>Ancient Codex</strong></p><p>Ancient Codex speichert auf diesem Gerät den Lernstand, Quizergebnisse, Merker und die Sprache. Kein Rechner und keine Gewohnheiten. Support: <a href="mailto:dev.outbox.88@outlook.com">dev.outbox.88@outlook.com</a>.</p></div>
+<div data-lang="fr" hidden><h1>Politique de confidentialité</h1><p><strong>Ancient Codex</strong></p><p>Ancient Codex garde sur cet appareil la progression des leçons, les résultats du quiz, les signets et la langue. Pas de calculateur ni d'habitudes. Assistance : <a href="mailto:dev.outbox.88@outlook.com">dev.outbox.88@outlook.com</a>.</p></div>
 </body>
 </html>

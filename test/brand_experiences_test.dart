@@ -255,7 +255,7 @@ SUPPORT_EMAIL=desk@example.com
     final notifications = tester.widget<SwitchListTile>(
       find.byKey(const Key('notifications-switch')),
     );
-    expect(notifications.value, isFalse);
+    expect(notifications.value, isTrue);
   });
 
   testWidgets('a fresh progress tab explains an empty history', (tester) async {
@@ -308,7 +308,7 @@ SUPPORT_EMAIL=desk@example.com
     await tester.ensureVisible(find.byKey(const Key('daily-challenge')));
     await tester.tap(find.byKey(const Key('daily-challenge')));
     await tester.pump();
-    expect(find.text('Closed'), findsOneWidget);
+    expect(find.text('Done'), findsOneWidget);
 
     await tester.ensureVisible(find.byKey(const Key('start-quiz')));
     await tester.tap(find.byKey(const Key('start-quiz')));

@@ -222,7 +222,7 @@ class _ScribeDrillState extends State<ScribeDrill> {
           ),
           const SizedBox(height: 4),
           Text(
-            '${context.tr('Best')} $best',
+            '${context.tr('Best drill')} $best',
             style: const TextStyle(color: Colors.white60),
           ),
           const SizedBox(height: 12),

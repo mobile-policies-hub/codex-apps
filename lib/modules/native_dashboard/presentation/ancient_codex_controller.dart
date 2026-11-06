@@ -468,7 +468,7 @@ class AncientCodexController extends ChangeNotifier {
   void recordDrill(int score) {
     if (score <= drillBest) return;
     drillBest = score;
-    final line = 'Scribe drill $score';
+    final line = 'Scribe drill: $score';
     if (activity.isEmpty || activity.first != line) activity.insert(0, line);
     notifyListeners();
   }
@@ -502,7 +502,7 @@ class AncientCodexController extends ChangeNotifier {
   }
 
   void _restore() {
-    final raw = vault?.read('codex.progress.v3');
+    final raw = vault?.read('codex.progress.v4');
     if (raw == null) return;
     try {
       final decoded = jsonDecode(raw);
@@ -556,7 +556,7 @@ class AncientCodexController extends ChangeNotifier {
     final store = vault;
     if (store == null) return;
     store.write(
-      'codex.progress.v3',
+      'codex.progress.v4',
       jsonEncode({
         'lessons': {
           for (final lesson in lessons)

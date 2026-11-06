@@ -9,14 +9,39 @@
     h1 { font-size: 22px; }
     a { color: #0b57d0; }
   </style>
+
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+  var lang = new URLSearchParams(location.search).get('lang') || 'en';
+  var nodes = document.querySelectorAll('[data-lang]');
+  var hit = false;
+  nodes.forEach(function (node) {
+    var show = node.getAttribute('data-lang') === lang;
+    node.hidden = !show;
+    if (show) hit = true;
+  });
+  if (!hit) {
+    nodes.forEach(function (node) {
+      node.hidden = node.getAttribute('data-lang') !== 'en';
+    });
+  }
+  document.documentElement.lang = hit ? lang : 'en';
+});
+</script>
 </head>
 <body>
-  <h1>Terms of Service</h1>
+<div data-lang="en">
+<h1>Terms of Service</h1>
   <p><strong>Zenith Habits</strong></p>
   <p>Effective date: 6 November 2026.</p>
   <p>Zenith Habits is a local habit tracker. Habit records, journal notes, and reminder times stay on this device.</p>
   <p>It is a personal checklist. It is not medical advice.</p>
   <p>The app is provided as is. If something looks wrong, write to <a href="mailto:dev.outbox.88@outlook.com">dev.outbox.88@outlook.com</a>.</p>
   <p>You may stop using the app at any time by deleting it. Local records are removed with the app.</p>
+</div>
+<div data-lang="ru" hidden><h1>Условия использования</h1><p><strong>Zenith Habits</strong></p><p>Локальный трекер привычек. Это личный список дел, не медицинская рекомендация. Напишите на <a href="mailto:dev.outbox.88@outlook.com">dev.outbox.88@outlook.com</a>.</p></div>
+<div data-lang="es" hidden><h1>Condiciones de uso</h1><p><strong>Zenith Habits</strong></p><p>Registro local de hábitos. Es una lista personal, no un consejo médico. Escribe a <a href="mailto:dev.outbox.88@outlook.com">dev.outbox.88@outlook.com</a>.</p></div>
+<div data-lang="de" hidden><h1>Nutzungsbedingungen</h1><p><strong>Zenith Habits</strong></p><p>Lokaler Gewohnheitstracker. Eine persönliche Liste, kein medizinischer Rat. Schreib an <a href="mailto:dev.outbox.88@outlook.com">dev.outbox.88@outlook.com</a>.</p></div>
+<div data-lang="fr" hidden><h1>Conditions d'utilisation</h1><p><strong>Zenith Habits</strong></p><p>Suivi local d'habitudes. Une liste personnelle, pas un avis médical. Écris à <a href="mailto:dev.outbox.88@outlook.com">dev.outbox.88@outlook.com</a>.</p></div>
 </body>
 </html>

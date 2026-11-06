@@ -9,9 +9,29 @@
     h1 { font-size: 22px; }
     a { color: #0b57d0; }
   </style>
+
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+  var lang = new URLSearchParams(location.search).get('lang') || 'en';
+  var nodes = document.querySelectorAll('[data-lang]');
+  var hit = false;
+  nodes.forEach(function (node) {
+    var show = node.getAttribute('data-lang') === lang;
+    node.hidden = !show;
+    if (show) hit = true;
+  });
+  if (!hit) {
+    nodes.forEach(function (node) {
+      node.hidden = node.getAttribute('data-lang') !== 'en';
+    });
+  }
+  document.documentElement.lang = hit ? lang : 'en';
+});
+</script>
 </head>
 <body>
-  <h1>Privacy Policy</h1>
+<div data-lang="en">
+<h1>Privacy Policy</h1>
   <p><strong>Apex Calc</strong></p>
   <p>Effective date: 6 November 2026.</p>
   <p>This policy explains what Apex Calc does with information. The same text is shown in the app under Settings, Privacy Policy.</p>
@@ -33,5 +53,10 @@
   <p>If this policy changes, the updated text will be shown in Settings and on this page. The effective date will change with it.</p>
   <h2>Contact</h2>
   <p>Questions: <a href="mailto:dev.outbox.88@outlook.com">dev.outbox.88@outlook.com</a></p>
+</div>
+<div data-lang="ru" hidden><h1>Политика конфиденциальности</h1><p><strong>Apex Calc</strong></p><p>Приложение хранит введённые числа, заметки и язык на этом устройстве. Курсы в калькуляторе — образцы для ориентира, не живая котировка. Уроков и привычек нет. Поддержка: <a href="mailto:dev.outbox.88@outlook.com">dev.outbox.88@outlook.com</a>.</p></div>
+<div data-lang="es" hidden><h1>Política de privacidad</h1><p><strong>Apex Calc</strong></p><p>Guarda los números, las notas y el idioma en el dispositivo. Las tasas son de muestra, no un mercado en vivo. Soporte: <a href="mailto:dev.outbox.88@outlook.com">dev.outbox.88@outlook.com</a>.</p></div>
+<div data-lang="de" hidden><h1>Datenschutz</h1><p><strong>Apex Calc</strong></p><p>Speichert Zahlen, Notizen und Sprache auf dem Gerät. Kurse sind Muster, kein live Markt. Support: <a href="mailto:dev.outbox.88@outlook.com">dev.outbox.88@outlook.com</a>.</p></div>
+<div data-lang="fr" hidden><h1>Politique de confidentialité</h1><p><strong>Apex Calc</strong></p><p>Garde les nombres, les notes et la langue sur l'appareil. Les taux sont des exemples, pas un marché en direct. Assistance : <a href="mailto:dev.outbox.88@outlook.com">dev.outbox.88@outlook.com</a>.</p></div>
 </body>
 </html>

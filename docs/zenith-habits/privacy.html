@@ -9,9 +9,29 @@
     h1 { font-size: 22px; }
     a { color: #0b57d0; }
   </style>
+
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+  var lang = new URLSearchParams(location.search).get('lang') || 'en';
+  var nodes = document.querySelectorAll('[data-lang]');
+  var hit = false;
+  nodes.forEach(function (node) {
+    var show = node.getAttribute('data-lang') === lang;
+    node.hidden = !show;
+    if (show) hit = true;
+  });
+  if (!hit) {
+    nodes.forEach(function (node) {
+      node.hidden = node.getAttribute('data-lang') !== 'en';
+    });
+  }
+  document.documentElement.lang = hit ? lang : 'en';
+});
+</script>
 </head>
 <body>
-  <h1>Privacy Policy</h1>
+<div data-lang="en">
+<h1>Privacy Policy</h1>
   <p><strong>Zenith Habits</strong></p>
   <p>Effective date: 6 November 2026.</p>
   <p>This policy explains what Zenith Habits does with information. The same text is shown in the app under Settings, Privacy Policy.</p>
@@ -32,5 +52,10 @@
   <p>If this policy changes, the updated text will be shown in Settings and on this page. The effective date will change with it.</p>
   <h2>Contact</h2>
   <p>Questions: <a href="mailto:dev.outbox.88@outlook.com">dev.outbox.88@outlook.com</a></p>
+</div>
+<div data-lang="ru" hidden><h1>Политика конфиденциальности</h1><p><strong>Zenith Habits</strong></p><p>Приложение хранит отметки привычек, время напоминаний, счёт воды, заметки дневника и язык на этом устройстве. Если разрешить уведомления, они ставятся на выбранное время. Уроков и калькулятора нет. Поддержка: <a href="mailto:dev.outbox.88@outlook.com">dev.outbox.88@outlook.com</a>.</p></div>
+<div data-lang="es" hidden><h1>Política de privacidad</h1><p><strong>Zenith Habits</strong></p><p>Guarda marcas de hábitos, horas de recordatorios, agua, notas y el idioma en el dispositivo. No hay lecciones ni calculadora. Soporte: <a href="mailto:dev.outbox.88@outlook.com">dev.outbox.88@outlook.com</a>.</p></div>
+<div data-lang="de" hidden><h1>Datenschutz</h1><p><strong>Zenith Habits</strong></p><p>Speichert Gewohnheiten, Erinnerungszeiten, Wasser, Tagebuch und Sprache auf dem Gerät. Keine Lektionen und kein Rechner. Support: <a href="mailto:dev.outbox.88@outlook.com">dev.outbox.88@outlook.com</a>.</p></div>
+<div data-lang="fr" hidden><h1>Politique de confidentialité</h1><p><strong>Zenith Habits</strong></p><p>Garde les habitudes, les heures de rappel, l'eau, le journal et la langue sur l'appareil. Pas de leçons ni de calculateur. Assistance : <a href="mailto:dev.outbox.88@outlook.com">dev.outbox.88@outlook.com</a>.</p></div>
 </body>
 </html>

@@ -9,14 +9,39 @@
     h1 { font-size: 22px; }
     a { color: #0b57d0; }
   </style>
+
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+  var lang = new URLSearchParams(location.search).get('lang') || 'en';
+  var nodes = document.querySelectorAll('[data-lang]');
+  var hit = false;
+  nodes.forEach(function (node) {
+    var show = node.getAttribute('data-lang') === lang;
+    node.hidden = !show;
+    if (show) hit = true;
+  });
+  if (!hit) {
+    nodes.forEach(function (node) {
+      node.hidden = node.getAttribute('data-lang') !== 'en';
+    });
+  }
+  document.documentElement.lang = hit ? lang : 'en';
+});
+</script>
 </head>
 <body>
-  <h1>Terms of Service</h1>
+<div data-lang="en">
+<h1>Terms of Service</h1>
   <p><strong>Apex Calc</strong></p>
   <p>Effective date: 6 November 2026.</p>
   <p>Apex Calc is a local calculator. The numbers you enter and your notes stay on this device.</p>
   <p>Calculator results are illustrations. They are not financial, tax, or investment advice.</p>
   <p>The app is provided as is, without a promise that every calculation will meet a particular purpose. If something looks wrong, write to <a href="mailto:dev.outbox.88@outlook.com">dev.outbox.88@outlook.com</a>.</p>
   <p>You may stop using the app at any time by deleting it. Local records are removed with the app.</p>
+</div>
+<div data-lang="ru" hidden><h1>Условия использования</h1><p><strong>Apex Calc</strong></p><p>Локальный калькулятор. Результаты — иллюстрации. Это не финансовая, налоговая или инвестиционная рекомендация. Напишите на <a href="mailto:dev.outbox.88@outlook.com">dev.outbox.88@outlook.com</a>.</p></div>
+<div data-lang="es" hidden><h1>Condiciones de uso</h1><p><strong>Apex Calc</strong></p><p>Calculadora local. Los resultados son ilustraciones, no asesoramiento financiero, fiscal ni de inversión. Escribe a <a href="mailto:dev.outbox.88@outlook.com">dev.outbox.88@outlook.com</a>.</p></div>
+<div data-lang="de" hidden><h1>Nutzungsbedingungen</h1><p><strong>Apex Calc</strong></p><p>Lokaler Rechner. Ergebnisse sind Beispiele und keine Finanz-, Steuer- oder Anlageberatung. Schreib an <a href="mailto:dev.outbox.88@outlook.com">dev.outbox.88@outlook.com</a>.</p></div>
+<div data-lang="fr" hidden><h1>Conditions d'utilisation</h1><p><strong>Apex Calc</strong></p><p>Calculateur local. Les résultats sont des illustrations, pas un conseil financier, fiscal ou d'investissement. Écris à <a href="mailto:dev.outbox.88@outlook.com">dev.outbox.88@outlook.com</a>.</p></div>
 </body>
 </html>

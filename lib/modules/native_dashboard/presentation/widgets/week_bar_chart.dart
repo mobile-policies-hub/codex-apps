@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:hybrid_app/core/config/app_brand_config.dart';
+import 'package:hybrid_app/core/l10n/app_text.dart';
 import 'package:hybrid_app/modules/native_dashboard/domain/tracker_format.dart';
 
 class WeekBarChart extends StatelessWidget {
@@ -75,7 +76,7 @@ class WeekBarChart extends StatelessWidget {
                           padding: const EdgeInsets.symmetric(horizontal: 3),
                           child: _Bar(
                             fraction: _fraction(values[index], scale),
-                            label: weekDayLabels[index],
+                            label: context.tr(weekDayLabels[index]),
                             selected: index == selectedIndex,
                             accent: accent,
                           ),

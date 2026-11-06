@@ -36,7 +36,7 @@ class DashboardHome extends StatelessWidget {
       padding: const EdgeInsets.fromLTRB(20, 4, 20, 28),
       children: [
         Text(
-          formatLongDate(tracker.today),
+          formatLongDate(tracker.today, context.tr),
           style: TextStyle(color: scheme.onSurfaceVariant, fontSize: 14),
         ),
         const SizedBox(height: 8),
@@ -537,7 +537,7 @@ class _MoodRow extends StatelessWidget {
                   child: Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 2),
                     child: _MoodChip(
-                      label: TrackerController.moods[index],
+                      label: context.tr(TrackerController.moods[index]),
                       glyph: glyphs[index],
                       selected: tracker.moodIndex == index,
                       accent: accent,

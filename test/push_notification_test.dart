@@ -224,14 +224,10 @@ void main() {
       200,
       scrollable: settingsScroll,
     );
-    await tester.tap(find.byKey(const Key('notifications-switch')));
-    await tester.pump();
-
     var notifications = tester.widget<SwitchListTile>(
       find.byKey(const Key('notifications-switch')),
     );
     expect(notifications.value, isFalse);
-    expect(find.text('Allow alerts?'), findsNothing);
 
     await tester.tap(find.byKey(const Key('notifications-switch')));
     await tester.pumpAndSettle();

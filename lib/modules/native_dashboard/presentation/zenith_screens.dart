@@ -339,7 +339,7 @@ class AnalyticsScreen extends StatelessWidget {
                     ),
                     const SizedBox(height: 2),
                     Text(
-                      '${tracker.streakDays} ${pluralize(tracker.streakDays, 'day', 'days')}',
+                      streakCaption(context, tracker.streakDays),
                       key: const Key('streak-value'),
                       style: TextStyle(
                         color: scheme.onSurface,
@@ -385,7 +385,7 @@ class AnalyticsScreen extends StatelessWidget {
                           padding: const EdgeInsets.symmetric(horizontal: 4),
                           child: _FractionBar(
                             fraction: fractions[index],
-                            label: 'D${index + 1}',
+                            label: context.tr(weekDayLabels[index]),
                             selected: index == tracker.today.weekday - 1,
                             accent: scheme.primary,
                           ),
@@ -488,4 +488,20 @@ class _FractionBar extends StatelessWidget {
       ],
     );
   }
+}
+
+String streakCaption(BuildContext context, int value) {
+  final code = AppText.maybeOf(context)?.code ?? 'en';
+  if (code == 'ru') {
+    final count = value.abs();
+    final mod10 = count % 10;
+    final mod100 = count % 100;
+    final word = mod10 == 1 && mod100 != 11
+        ? 'день'
+        : (mod10 >= 2 && mod10 <= 4 && (mod100 < 12 || mod100 > 14))
+        ? 'дня'
+        : 'дней';
+    return '$value $word';
+  }
+  return '$value ${context.tr(pluralize(value, 'day', 'days'))}';
 }
