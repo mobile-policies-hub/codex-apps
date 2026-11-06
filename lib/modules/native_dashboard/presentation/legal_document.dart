@@ -10,7 +10,7 @@ String legalDocumentTitle(LegalDocument document) {
 }
 
 /// GitHub Pages site that hosts one public privacy page per app.
-const privacyPolicySite = 'https://denischern.github.io/codex-apps';
+const privacyPolicySite = 'https://mobile-policies-hub.github.io/codex-apps';
 
 /// Public HTTPS address for the App Store privacy field.
 ///
